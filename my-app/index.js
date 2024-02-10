@@ -3,6 +3,7 @@ const {open} = require('sqlite')
 const sqlite3 = require('sqlite3')
 const bcrypt = require('bcrypt')
 const path = require('path')
+const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const { error } = require('console')
 const dbPath = path.join(__dirname,'loginDetails.db')
@@ -12,6 +13,7 @@ let db = null
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 const initializeDatabase= async()=>{
     db = await open({
