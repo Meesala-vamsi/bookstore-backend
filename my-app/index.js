@@ -32,13 +32,16 @@ const middleWare=async (request,response,next)=>{
     }
 
     if(jwtToken!==undefined){
-        jwt.verify(jwtToken,'vamsi',async(error,user)=>{
+        jwt.verify(jwtToken,'vamsi',async(error,payload)=>{
             if(error){
                 response.send("Invalid JwtToken")
             }else{
+                request.username = payload.username
                 next()
             }
         })
+    }else{
+        response.send("Invalid JWT Token")
     }
 }
 
@@ -56,10 +59,13 @@ app.post('/login',async(request,response)=>{
         response.status(404);
         response.send("User NotFound")
     }else{
+        const payload={
+            username:username
+        }
         const comparePassword = await bcrypt.compare(password,hashedPassword)
         if(comparePassword===true){
-            const generateToken=jwt.sign({username},'vamsi')
-            response.send(generateToken)
+            const generateToken=jwt.sign(payload,'vamsi')
+            response.send({generateToken})
         }else{
             response.send("Not")
         }
