@@ -5,19 +5,14 @@ const bcrypt = require('bcrypt')
 const path = require('path')
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
-const { error } = require('console')
+
 const dbPath = path.join(__dirname,'loginDetails.db')
 
 let db = null 
 
 const app = express()
-
-const corsOptions={
-    origin:'http://localhost:3000/login'
-}
-
 app.use(express.json())
-app.use(cors(corsOptions))
+app.use(cors())
 
 const initializeDatabase= async()=>{
     db = await open({
@@ -25,7 +20,7 @@ const initializeDatabase= async()=>{
         driver:sqlite3.Database
     })
 
-    app.listen(3000)
+    app.listen(3001)
 }
 
 const middleWare=async (request,response,next)=>{
