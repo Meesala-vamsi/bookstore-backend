@@ -6,6 +6,8 @@
 -- username,password
 -- )
 -- VALUES
--- ('vamsi','vamsisony');
+-- ('sony','vamsisony');
 
 SELECT * FROM user;
+
+-- DELETE FROM user WHERE username='vamsi';

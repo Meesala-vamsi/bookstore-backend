@@ -20,7 +20,7 @@ const initializeDatabase= async()=>{
         driver:sqlite3.Database
     })
 
-    app.listen(3001)
+    app.listen(3000)
 }
 
 const middleWare=async (request,response,next)=>{
